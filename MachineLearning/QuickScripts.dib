@@ -1,0 +1,51 @@
+#!csharp
+
+// ML.NET Nuget packages 
+#r "nuget:Microsoft.ML"
+    
+// DataFrame Nuget package 
+#r "nuget:Microsoft.Data.Analysis"
+    
+// AutoML Nuget package 
+#r "nuget:Microsoft.ML.AutoML"
+
+using Microsoft.ML;
+using Microsoft.ML.Data;
+using Microsoft.Data;
+using Microsoft.Data.Analysis;
+using System.IO;
+
+#!csharp
+
+//var trainDf = DataFrame.LoadCsv(@"LogDetails.csv");
+
+// Id,Body,DateTime,DestinationMember,DestinationType,JobId,JobLogId,LogType,Message,OrganizationId,Origin,PipelineStage,SourceMember,SourceType,StackTrace,StepId
+
+var columns = new List<StringDataFrameColumn>();
+
+var lines = File.ReadAllLines(@"LogDetails.csv");
+
+var headers = lines.First().Split(",");
+
+foreach (var header in headers)
+{
+    columns.Add(new StringDataFrameColumn(header, lines.Length));
+}
+
+//var bodyColumn = new StringDataFrameColumn("Body");
+//var dateTimeColumn = new StringDataFrameColumn("DateTime");
+//var destinationMemberColumn = new StringDataFrameColumn("DestinationMember");
+//var destinationTypeColumn = new StringDataFrameColumn("Id");
+
+//var trainDf = new DataFrame(columns);
+var trainDf = DataFrame.LoadCsv(@"LogDetails.csv");
+
+
+foreach (var column in columns)
+{
+    trainDf.Columns.Add(column);
+}
+
+//var trainDf = DataFrame.LoadCsv(@"LogDetails.csv");
+
+trainDf.Description()

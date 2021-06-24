@@ -1,0 +1,4 @@
+#!pwsh
+
+$var1 = "variable"
+$var1

@@ -1,0 +1,98 @@
+#!csharp
+
+//#r "nuget:NewtonSoft.Json"
+
+//using Newtonsoft.Json;
+using System;
+using System.Text.Json;
+
+#!csharp
+
+// Enums
+enum DataType
+{
+    String,
+    Int,
+    Bool,
+    Decimal,
+    Datetime
+}
+
+enum DisplayType
+{
+    Timespan,
+    DatetimePicker,
+    DatePicker,
+    TimePicker,
+    Table, // Metadata field contains headings perhaps?
+    Regex, // Regex is the rules applied for the input like phone numbers
+    Cron, // Represents
+    Password,
+    Text,
+    Integer,
+    Decimal,
+    File, // Base64 string
+    Checkbox,
+    Dropdown,
+    CheckboxDropdown, // Multiselect?
+    Markdown // WYSIWYG
+}
+
+#!csharp
+
+class SettingParameterDefinition
+{
+    public string Key { get; set; }
+    public string DisplayName { get; set; }
+    public string GroupName { get; set; }
+    public string Metadata { get; set; } // e.g. Table/CSV -headers, or maybe Regex -pattern
+    public string Description { get; set; }
+    public DataType DataType { get; set; }
+    public DisplayType DisplayType { get; set; }
+    public Uri Link { get; set; }
+    public string DataSourceEndpoint { get; set; } // when it makes more sense than using Metadata
+    public bool IsMandatory { get; set; }
+    public bool IsRecommended { get; set; } // If mandatory shouldn't prevent actions like saving
+    public bool IsDependent { get; set; }
+    public string ParentKey { get; set; }
+    public int MaxValue { get; set; }
+    public int MinValue { get; set; }
+    public string DefaultValue { get; set; } // can be anything
+    public string DependentKey { get; set; }
+}
+
+#!csharp
+
+var definition = new SettingParameterDefinition();
+var serializerOptions = new JsonSerializerOptions() {WriteIndented = true};
+
+//var result = JsonConvert.SerializeObject(definition, Formatting.Indented);
+var result = System.Text.Json.JsonSerializer.Serialize(definition, serializerOptions);
+
+Console.WriteLine(result);
+
+#!markdown
+
+# Type Script
+```ts
+// This is generated code from Json
+export interface RootObject {
+    Key?: any;
+    DisplayName?: any;
+    GroupName?: any;
+    Metadata?: any;
+    Description?: any;
+    DataType: number;
+    DisplayType: number;
+    Link?: any;
+    DataSourceEndpoint?: any;
+    IsMandatory: boolean;
+    IsRecommended: boolean;
+    IsDependent: boolean;
+    ParentKey?: any;
+    MaxValue: number;
+    MinValue: number;
+    DefaultValue?: any;
+    DependentKey?: any;
+}
+```
