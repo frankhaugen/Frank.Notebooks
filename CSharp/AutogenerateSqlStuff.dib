@@ -1,0 +1,40 @@
+#!csharp
+
+public class Log
+{
+    public long Id { get; set; }
+    public string Level { get; set; }
+    public int EventId { get; set; }
+    public string ApplicationName { get; set; }
+    public string? EventName { get; set; }
+    public string Name { get; set; }
+    public string Message { get; set; }
+    public string? Stacktrace { get; set; }
+    public string DotnetVersion { get; set; }
+    public string MachineName { get; set; }
+    public string OperatingSystem { get; set; }
+    public DateTime Timestamp { get; set; }
+}
+
+#!csharp
+
+string GetSqlType()
+{
+
+
+    return "";
+}
+
+#!csharp
+
+var properties = typeof(Log).GetProperties();
+var dictionary = new Dictionary<string, string>();
+
+foreach (var propertyInfo in properties)
+{
+    if (propertyInfo.PropertyType == typeof(long))
+    {
+        if(propertyInfo.Name.Equals("Id", StringComparison.InvariantCultureIgnoreCase)) dictionary.Add(propertyInfo.Name, "[bigint] NOT NULL IDENTITY(1, 1) PRIMARY KEY");
+        else dictionary.Add(propertyInfo.Name, "[bigint] NOT NULL");
+    }
+}
