@@ -1,0 +1,32 @@
+#!csharp
+
+#r nuget:CronExpressionDescriptor
+#r nuget:Cronos
+
+using System.Globalization;
+using CronExpressionDescriptor;
+using Cronos;
+
+#!csharp
+
+CultureInfo.CurrentCulture.TwoLetterISOLanguageName
+
+#!csharp
+
+var cronExpression = CronExpression.Parse("0 0 0 1 1 *", CronFormat.IncludeSeconds);
+cronExpression
+
+#!csharp
+
+var nextOccurrence = cronExpression.GetNextOccurrence(DateTime.UtcNow);
+nextOccurrence
+
+#!csharp
+
+var description = ExpressionDescriptor.GetDescription(cronExpression.ToString(), new Options(){
+    DayOfWeekStartIndexZero = false,
+    Use24HourTimeFormat = true,
+    Locale = "en"
+});
+
+description

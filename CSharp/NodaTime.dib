@@ -1,0 +1,9 @@
+#!csharp
+
+#r nuget:NodaTime
+
+using NodaTime;
+
+#!csharp
+
+var  instant = Instant.FromDateTimeUtc(DateTime.UtcNow);

@@ -1,0 +1,38 @@
+#!csharp
+
+#r "nuget:Microsoft.DotNet.Interactive.ExtensionLab, 1.0.0-beta.21309.3"
+#r "nuget:Plotly.NET.Interactive, 2.0.0-preview.4" 
+#r "nuget:Microsoft.ML"
+#r "nuget:Microsoft.Data.Analysis"
+#r "nuget:Microsoft.ML.AutoML"
+#r "nuget:Plotly.NET, 2.0.0-preview.4"
+
+using Microsoft.AspNetCore.Html;
+using Microsoft.Data;
+using Microsoft.Data.Analysis;
+using Microsoft.ML;
+using Microsoft.ML.Data;
+using Plotly.NET.Interactive;
+using Plotly.NET;
+using Plotly;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+
+#!csharp
+
+var trace = new StackTrace();
+trace.GetFrames().Select(x => x.ToString()).ToList()
+
+#!csharp
+
+var path = "LogDetails.csv";
+
+#!csharp
+
+var frame = DataFrame.LoadCsv(path, ';');
+
+#!csharp
+
+frame

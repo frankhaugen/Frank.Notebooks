@@ -1,0 +1,5 @@
+#!csharp
+
+ulong variable = 65434443515544414L;
+
+Math.Pow(variable, 10)
